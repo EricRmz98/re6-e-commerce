@@ -1,0 +1,14 @@
+.purchase-container{
+    width: 100%;
+    border: 1px solid #DEDEDE;
+}
+
+.purchase-header-container{
+    border-bottom: 1px solid #DEDEDE;
+}
+
+.purchases-quantity-container {
+    border: 1px solid #DEDEDE;
+    height: 2rem;
+    width: 3rem;
+}

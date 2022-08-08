@@ -1,0 +1,17 @@
+.login-father{
+    height: calc(100vh - 6rem);
+}
+
+.login-container {
+    width: 25rem;
+    border: 1px solid #DEDEDE;
+}
+
+.test-data-container {
+    background-color: #D8F5FD;
+}
+
+.login-input {
+    width: 100%;
+    padding: .25rem;
+}

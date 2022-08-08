@@ -1,0 +1,26 @@
+.home-search-input:focus,
+.home-search-button:focus {
+    box-shadow: none !important;
+}
+
+.home-ul {
+    list-style: none;
+    padding: 0;
+}
+
+.home-ul-header {
+    border-bottom: 1px solid #BBBBBB;
+    padding: .425rem .25rem;
+    margin-bottom: .425rem;
+    color: #777777;
+}
+
+.home-li{
+    padding-left: .25rem;
+    color: #777777;
+}
+
+.home-li:hover{
+    cursor: pointer;
+    background-color: #E2E2E2;
+}
