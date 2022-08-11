@@ -1,0 +1,22 @@
+.cart-product-container{
+    border: 1px solid #DEDEDE;
+    height: 9.2rem;
+}
+
+.cart-delete-button{
+    color: #d9230f;
+    background-color: transparent;
+    border: 0;
+    padding: 1px;
+    height: 1.5rem;
+}
+
+.cart-product-quantity-container{
+    border: 1px solid #DEDEDE;
+    height: 1.5rem;
+    width: 2.5rem;
+}
+
+.cart-checkout-container {
+    border-top: 1px solid #DEDEDE;
+}

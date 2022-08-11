@@ -1,17 +1,18 @@
 import React, { useEffect, useState } from 'react';
-import { Container } from 'react-bootstrap';
 import { useDispatch, useSelector } from 'react-redux';
 import { getProductsThunk } from '../store/slices/products.slice';
-import { useParams, useNavigate } from 'react-router-dom';
-import '../styles/Card.css';
-import '../styles/ProductDetails.css'
+import { useNavigate, useParams } from 'react-router-dom';
+import '../styles/ProductDetails.css';
 import Button from 'react-bootstrap/Button';
+import Card from '../components/Card';
+import { addToCartThunk } from '../store/slices/cart.slice';
 
 
 const ProductDetails = () => {
 
-    const navigate = useNavigate();
+    const token = localStorage.getItem('token');
     const dispatch = useDispatch();
+    const navigate = useNavigate();
     const { id } = useParams();
     const allProducts = useSelector(state => state.products);
     const [productDetails, setProductDetails] = useState({});
@@ -57,9 +58,17 @@ const ProductDetails = () => {
         setProductQuantity(productQuantity + 1);
     }
 
-    const addToCart = e => {
-        e.stopPropagation();
-        alert('button')
+    const addToCart = () => {
+        const product = {
+            id: Number(id),
+            quantity: productQuantity
+        }
+        
+        if (token) {
+            dispatch(addToCartThunk(product));
+        } else {
+            navigate('/login');
+        }
     }
 
     return (
@@ -148,7 +157,11 @@ const ProductDetails = () => {
                     </div>
 
                     <div className="d-grid gap-2 mb-1">
-                        <Button variant="primary" size="md">
+                        <Button
+                            variant="primary"
+                            size="md"
+                            onClick={addToCart}
+                        >
                             Add to cart <i className="fa-solid fa-cart-shopping"></i>
                         </Button>
                     </div>
@@ -161,34 +174,7 @@ const ProductDetails = () => {
 
                 <div className='d-flex'>
                     {suggestedProducts.map(product => (
-                        <div
-                            onClick={() => navigate(`/products/${product.id}`)}
-                            className='product-card m-1 rounded'
-                            key={product.id}
-                        >
-                            <div className='product-card-img-container p-2'>
-                                <img className='product-card-img' src={product.productImgs[0]} />
-                            </div>
-                            <div className='p-2 d-flex flex-column justify-content-center'>
-                                <div className='card-info-container d-flex flex-column justify-content-between'>
-                                    <div>
-                                        <p className='m-0'>{product.title}</p>
-                                    </div>
-                                    <div className='d-flex justify-content-between align-items-end'>
-                                        <div>
-                                            <p className='m-0 text-primary'><small>Price</small></p>
-                                            <p className='m-0'>${product.price}</p>
-                                        </div>
-                                        <button
-                                            onClick={addToCart}
-                                            className='card-add-to-cart-button'
-                                        >
-                                            <i className="fa-solid fa-cart-shopping"></i>
-                                        </button>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
+                        <Card product={product} key={product.id} />
                     ))}
                 </div>
             </div>

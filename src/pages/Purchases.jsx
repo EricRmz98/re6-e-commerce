@@ -32,11 +32,10 @@ const Purchases = () => {
 
                     {purchase.cart.products.map(product => (
                         <div key={product.id} className='d-flex justify-content-between align-items-center py-3 px-4'>
-                        <p className='m-0' style={{width: '22rem'}}>{product.title}</p>
-                        <p className='purchases-quantity-container m-0 d-flex justify-content-center align-items-center'>{product.productsInCart.quantity}</p>
-                        <p className='fw-bold m-0 text-end' style={{width: '5.5rem'}}>${product.price}</p>
-                    </div>
-
+                            <p className='m-0' style={{ width: '22rem' }}>{product.title}</p>
+                            <p className='purchases-quantity-container m-0 d-flex justify-content-center align-items-center'>{product.productsInCart.quantity}</p>
+                            <p className='fw-bold m-0 text-end' style={{ width: '5.5rem' }}>${product.price * product.productsInCart.quantity}</p>
+                        </div>
                     ))}
 
                 </div>

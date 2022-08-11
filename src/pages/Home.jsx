@@ -1,15 +1,13 @@
 import React, { useEffect, useState } from 'react';
 import axios from 'axios'
 import '../styles/Home.css'
-import '../styles/Card.css'
 import { Container, Row, Col, InputGroup, Form, Button } from 'react-bootstrap';
 import { useDispatch, useSelector } from 'react-redux';
 import { getProductsThunk, productsByCategoryThunk, searchProductsThunk } from '../store/slices/products.slice';
-import { useNavigate } from 'react-router-dom';
+import Card from '../components/Card';
 
 const Home = () => {
 
-    const navigate = useNavigate();
     const products = useSelector(state => state.products);
     const dispatch = useDispatch();
     const [categories, setCategories] = useState([]);
@@ -22,11 +20,6 @@ const Home = () => {
             .get('https://ecommerce-api-react.herokuapp.com/api/v1/products/categories')
             .then(res => setCategories(res.data.data.categories));
     }, [])
-
-    const addToCart = e => {
-        e.stopPropagation();
-        alert('button')
-    }
 
     return (
         <Container className='pb-4'>
@@ -62,38 +55,9 @@ const Home = () => {
                     </div>
 
                     <div className='d-flex flex-wrap'>
-
                         {products.map(product => (
-                            <div
-                                onClick={() => navigate(`/products/${product.id}`)}
-                                className='product-card m-1 rounded'
-                                key={product.id}
-                            >
-                                <div className='product-card-img-container p-2'>
-                                    <img className='product-card-img' src={product.productImgs[0]} />
-                                </div>
-                                <div className='p-2 d-flex flex-column justify-content-center'>
-                                    <div className='card-info-container d-flex flex-column justify-content-between'>
-                                        <div>
-                                            <p className='m-0'>{product.title}</p>
-                                        </div>
-                                        <div className='d-flex justify-content-between align-items-end'>
-                                            <div>
-                                                <p className='m-0 text-primary'><small>Price</small></p>
-                                                <p className='m-0'>${product.price}</p>
-                                            </div>
-                                            <button
-                                                onClick={addToCart}
-                                                className='card-add-to-cart-button'
-                                            >
-                                                <i className="fa-solid fa-cart-shopping"></i>
-                                            </button>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
+                            <Card product={product} key={product.id}/>
                         ))}
-
                     </div>
                 </Col>
             </Row>
