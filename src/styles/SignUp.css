@@ -1,0 +1,13 @@
+.sign-up-father {
+  height: calc(100vh - 6rem);
+}
+
+.sign-up-container {
+  width: 25rem;
+  border: 1px solid #dedede;
+}
+
+.sign-up-input {
+  width: 100%;
+  padding: 0.25rem;
+}
